@@ -1,0 +1,101 @@
+[2m2026-05-23T08:54:17-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-05-23T08:54:17-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"Get \"http://localhost:8080/api\": dial tcp [::1]:8080: connect: connection refused"
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Fail to refine k9s config [2merror=[0m"unable to activate context \"\": getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"http://localhost:8080/version?timeout=2m0s\": dial tcp [::1]:8080: connect: connection refused"
+[2m2026-05-23T08:54:17-07:00[0m [93mWRN[0m 💣 Kubernetes connectivity toast!
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m K9s config save failed [2merror=[0m"unable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [93mWRN[0m Fail to load global/context configuration [2merror=[0m"Get \"http://localhost:8080/api\": dial tcp [::1]:8080: connect: connection refused\nunable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\"\nunable to activate context \"\": getcontext - invalid context specified: \"\"\ncannot connect to context: \nk8s connection failed for context: \nunable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Load cluster resources - No API server connection
+[2m2026-05-23T08:54:17-07:00[0m [93mWRN[0m Unable to dial API client for metrics [2merror=[0m"no connection to dial"
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:17-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:19-07:00[0m [93mWRN[0m No resources found for contexts in "-" namespace
+[2m2026-05-23T08:54:27-07:00[0m [91mERR[0m Failed to obtain list of namespaces [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-05-23T08:54:27-07:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-05-23T08:54:27-07:00[0m [91mERR[0m Config save failed! [2merror=[0m"unable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""
+[2m2026-05-23T12:41:41-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-05-23T12:41:41-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-05-23T12:41:41-07:00[0m [92mINF[0m [CONFIG] Saving K9s config to disk [2mpath=[0m"/Users/ryantran/Library/Application Support/k9s/config.yaml"
+[2m2026-05-23T12:41:41-07:00[0m [93mWRN[0m Fail to load global/context configuration [2merror=[0m"unable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""
+[2m2026-06-06T13:23:00-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-06-06T13:23:00-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"Get \"https://127.0.0.1:59262/api\": dial tcp 127.0.0.1:59262: connect: connection refused"
+[2m2026-06-06T13:23:00-07:00[0m [93mWRN[0m Namespace validation failed [2mns=[0mdefault [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-06-06T13:23:00-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:59262/version?timeout=2m0s\": dial tcp 127.0.0.1:59262: connect: connection refused"
+[2m2026-06-06T13:23:00-07:00[0m [93mWRN[0m 💣 Kubernetes connectivity toast!
+[2m2026-06-06T13:23:00-07:00[0m [93mWRN[0m Namespace validation failed [2mns=[0mdefault [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-06-06T13:23:00-07:00[0m [93mWRN[0m Fail to load global/context configuration [2merror=[0m"Get \"https://127.0.0.1:59262/api\": dial tcp 127.0.0.1:59262: connect: connection refused\ncannot connect to context: minikube\nk8s connection failed for context: minikube"
+[2m2026-06-06T13:23:00-07:00[0m [91mERR[0m Load cluster resources - No API server connection
+[2m2026-06-06T13:23:01-07:00[0m [93mWRN[0m Unable to dial API client for metrics [2merror=[0m"no connection to dial"
+[2m2026-08-22T19:22:24-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:22:24-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:22:24-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-22T19:27:03-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:27:03-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:27:03-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-22T19:35:31-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:35:31-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:35:31-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-22T19:36:45-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:36:45-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:36:45-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-22T19:36:48-07:00[0m [93mWRN[0m No resources found for v1/pods in "default" namespace
+[2m2026-08-22T19:37:10-07:00[0m [93mWRN[0m No resources found for v1/pods in "minikube" namespace
+[2m2026-08-22T19:37:15-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:37:15-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:37:15-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-22T19:37:18-07:00[0m [93mWRN[0m No resources found for v1/pods in "minikube" namespace
+[2m2026-08-22T19:46:25-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:55728/version?timeout=2m0s\": dial tcp 127.0.0.1:55728: connect: connection refused"
+[2m2026-08-22T19:46:25-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (1/5)"
+[2m2026-08-22T19:46:44-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:55728/version?timeout=2m0s\": dial tcp 127.0.0.1:55728: connect: connection refused"
+[2m2026-08-22T19:46:44-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (2/5)"
+[2m2026-08-22T19:47:09-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:55728/version?timeout=2m0s\": dial tcp 127.0.0.1:55728: connect: connection refused"
+[2m2026-08-22T19:47:09-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (3/5)"
+[2m2026-08-22T19:47:41-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:55728/version?timeout=2m0s\": dial tcp 127.0.0.1:55728: connect: connection refused"
+[2m2026-08-22T19:47:41-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (4/5)"
+[2m2026-08-22T19:47:41-07:00[0m [93mWRN[0m Namespace validation failed [2mns=[0mkube-system [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-08-22T19:57:24-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:57:24-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:57:24-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-22T19:59:08-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-22T19:59:08-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-22T19:59:08-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-27T10:59:39-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-27T10:59:39-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-27T10:59:39-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-27T10:59:46-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-27T10:59:46-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-27T10:59:46-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-27T11:11:10-07:00[0m [93mWRN[0m No resources found for v1/pods in "default" namespace
+[2m2026-08-27T14:38:13-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:65036/version?timeout=2m0s\": dial tcp 127.0.0.1:65036: connect: connection refused"
+[2m2026-08-27T14:38:13-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (1/5)"
+[2m2026-08-27T14:38:24-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:65036/version?timeout=2m0s\": dial tcp 127.0.0.1:65036: connect: connection refused"
+[2m2026-08-27T14:38:24-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (2/5)"
+[2m2026-08-27T14:38:42-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:65036/version?timeout=2m0s\": dial tcp 127.0.0.1:65036: connect: connection refused"
+[2m2026-08-27T14:38:42-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (3/5)"
+[2m2026-08-27T14:39:24-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"https://127.0.0.1:65036/version?timeout=2m0s\": dial tcp 127.0.0.1:65036: connect: connection refused"
+[2m2026-08-27T14:39:24-07:00[0m [91mERR[0m Cluster updates failed. Giving up ;( [2merror=[0m"conn check failed (4/5)"
+[2m2026-08-27T14:39:24-07:00[0m [93mWRN[0m Namespace validation failed [2mns=[0mdefault [2merror=[0m"user not authorized to list all namespaces"
+[2m2026-08-29T23:36:19-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-08-29T23:36:19-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"No metrics api group metrics.k8s.io found on cluster"
+[2m2026-08-29T23:36:19-07:00[0m [92mINF[0m ✅ Kubernetes connectivity OK
+[2m2026-08-29T23:36:22-07:00[0m [93mWRN[0m No resources found for v1/pods in "default" namespace
+[2m2026-09-01T22:47:35-07:00[0m [92mINF[0m 🐶 K9s starting up...
+[2m2026-09-01T22:47:35-07:00[0m [93mWRN[0m Fail to locate metrics-server [2merror=[0m"Get \"http://localhost:8080/api\": dial tcp [::1]:8080: connect: connection refused"
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Fail to refine k9s config [2merror=[0m"unable to activate context \"\": getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Unable to fetch server version [2merror=[0m"Get \"http://localhost:8080/version?timeout=2m0s\": dial tcp [::1]:8080: connect: connection refused"
+[2m2026-09-01T22:47:35-07:00[0m [93mWRN[0m 💣 Kubernetes connectivity toast!
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m K9s config save failed [2merror=[0m"unable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [93mWRN[0m Fail to load global/context configuration [2merror=[0m"Get \"http://localhost:8080/api\": dial tcp [::1]:8080: connect: connection refused\nunable to activate context \"\": getcontext - invalid context specified: \"\"\ncannot connect to context: \nk8s connection failed for context: \nunable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Load cluster resources - No API server connection
+[2m2026-09-01T22:47:35-07:00[0m [93mWRN[0m Unable to dial API client for metrics [2merror=[0m"no connection to dial"
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:35-07:00[0m [91mERR[0m Unable to assert active namespace. Using default [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:37-07:00[0m [93mWRN[0m No resources found for contexts in "-" namespace
+[2m2026-09-01T22:47:42-07:00[0m [91mERR[0m Unable to nuke k9s shell pod [2merror=[0m"getcontext - invalid context specified: \"\""
+[2m2026-09-01T22:47:42-07:00[0m [91mERR[0m Config save failed! [2merror=[0m"unable to locate associated cluster for context \"\": getcontext - invalid context specified: \"\""

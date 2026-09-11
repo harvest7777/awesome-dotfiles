@@ -1,0 +1,17 @@
+k9s:
+  cluster: minikube
+  namespace:
+    active: default
+    lockFavorites: false
+    favorites:
+      - argocd
+      - kube-system
+      - default
+      - all
+      - kafka
+      - minikube
+  view:
+    active: v1/pods default
+  featureGates:
+    nodeShell: false
+  proxy: null
