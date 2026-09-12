@@ -54,6 +54,10 @@ vim.keymap.set('n', '<leader>gp', function()
   local state_path = vim.fs.joinpath(vim.fn.stdpath("state"), "pr_links.json")
   local data = read_cache(state_path)
   local pr_link = data[cwd_branch_name_key]
+  if not pr_link then
+    vim.notify('No saved link for this branch', vim.log.levels.WARN)
+    return
+  end
   vim.fn.setreg("+", pr_link)
   vim.notify('Copied ' .. pr_link)
 end, { desc = 'Copy saved link' })
@@ -125,7 +129,7 @@ end, { desc = 'Open real file from Neogit commit preview' })
 -- this workflow.
 local function notes_path()
   local root = vim.trim(vim.fn.system("git rev-parse --show-toplevel"))
-  local key = (vim.v.shell_error == 0 and root ~= "") and vim.fn.fnamemodify(root, ":t")
+  local key = (vim.v.shell_error == 0 and root ~= "") and root
       or vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
   key = key:gsub("[^%w%-_.]", "-")
   local notes_dir = vim.fs.joinpath(vim.uv.os_homedir(), "notes")
@@ -245,9 +249,10 @@ vim.keymap.set('n', '<leader>md', function()
     pcall(vim.api.nvim_win_set_cursor, 0, { line, col })
   end
 
+  local notes_autocmd_group = vim.api.nvim_create_augroup("notes_cursor_" .. buf, { clear = true })
   vim.api.nvim_create_autocmd("BufWinLeave", {
+    group = notes_autocmd_group,
     buffer = buf,
-    once = true,
     callback = function()
       pcall(save_notes_cursor, path, vim.api.nvim_win_get_cursor(0))
       -- Still the current buffer/window at this point (BufWinLeave fires
