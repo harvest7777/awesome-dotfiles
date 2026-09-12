@@ -29,9 +29,7 @@ function fish_greeting
     printf "\n"
 end
 
-alias fishconf="nvim ~/.config/fish/config.fish"
 alias k="kubectl"
-alias nvimconf="nvim ~/.config/nvim/"
 
 if status is-interactive
     atuin init fish | source
