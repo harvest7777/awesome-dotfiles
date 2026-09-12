@@ -1,3 +1,6 @@
+-------------------------------------------------------------------------------
+-- PR links
+-------------------------------------------------------------------------------
 local function read_cache(cache_path)
   local f = io.open(cache_path, "r")
   if not f then
@@ -55,7 +58,9 @@ vim.keymap.set('n', '<leader>gp', function()
   vim.notify('Copied ' .. pr_link)
 end, { desc = 'Copy saved link' })
 
--- misc
+-------------------------------------------------------------------------------
+-- File actions
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>bx', function()
   local bufnr = vim.api.nvim_get_current_buf()
   vim.cmd('bp')
@@ -64,6 +69,10 @@ end, { desc = "Delete current buffer safely" })
 vim.keymap.set('n', '<leader>ww', '<cmd>w<cr>', { desc = 'Write file' })
 vim.keymap.set('n', '<leader>wa', '<cmd>wa<cr>', { desc = 'Write all' })
 vim.keymap.set('n', '<leader>qq', '<cmd>qa!<cr>', { desc = 'Quit all' })
+
+-------------------------------------------------------------------------------
+-- Neogit
+-------------------------------------------------------------------------------
 -- Neogit's "view file at old commit" buffers are named
 -- neogit://<sha>/<path-relative-to-repo-root>, not a real filesystem path,
 -- so expand("%:p") on them just returns garbage. Resolve to the real path
@@ -107,6 +116,9 @@ vim.keymap.set('n', '<leader>nf', function()
   pcall(vim.api.nvim_win_set_cursor, 0, { line, col })
 end, { desc = 'Open real file from Neogit commit preview' })
 
+-------------------------------------------------------------------------------
+-- Notes
+-------------------------------------------------------------------------------
 -- Per-worktree scratch notes, kept in ~/notes/ so they survive both editor
 -- restarts and /tmp getting cleared on reboot. One file per worktree root
 -- (not per branch) since a worktree checkout IS effectively the branch in
@@ -251,14 +263,17 @@ vim.keymap.set('n', '<leader>md', function()
   vim.keymap.set('n', '<Esc>', '<cmd>close<cr>', { buffer = buf, silent = true })
 end, { desc = "Open this worktree's notes.md (floating)" })
 
-
--- toggles
+-------------------------------------------------------------------------------
+-- Editor toggles
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>lb', function()
   vim.wo.wrap = not vim.wo.wrap
   vim.wo.linebreak = vim.wo.wrap
 end, { desc = 'Toggle wrap + linebreak' })
 
--- lsp stuff
+-------------------------------------------------------------------------------
+-- LSP
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
 vim.keymap.set('i', '<C-Space>', function() vim.lsp.buf.signature_help({ border = 'rounded', max_width = 80 }) end,
   { desc = 'Signature help' })
@@ -280,14 +295,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- epic void register trick
+-------------------------------------------------------------------------------
+-- Clipboard and buffer navigation
+-------------------------------------------------------------------------------
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- close the current buffer without closing the window
 vim.keymap.set('n', '<Tab>', '<cmd>b#<cr>')
 
-
--- scrolling
+-------------------------------------------------------------------------------
+-- Scrolling and tabs
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down and center' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up and center' })
 vim.keymap.set('n', 'j', 'jzz', { desc = 'Down and center' })
@@ -298,12 +316,16 @@ vim.keymap.set('n', 'N', 'Nzz', { desc = 'Prev match and center' })
 vim.keymap.set('n', '<leader>gx', '<cmd>tabclose<cr>', { desc = 'Close tab' })
 vim.keymap.set('n', '<leader>gn', '<cmd>tabnew<cr>', { desc = 'New tab' })
 
--- noice
+-------------------------------------------------------------------------------
+-- Noice
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>nd', '<cmd>Noice dismiss<cr>', { desc = 'Dismiss Noice toasts' })
 vim.keymap.set('n', '<leader>na', '<cmd>Noice all<cr>', { desc = 'View all messages' })
 vim.keymap.set('n', '<leader>nl', '<cmd>Noice last<cr>', { desc = 'View last message' })
 
--- window management
+-------------------------------------------------------------------------------
+-- Window management
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>w|', vim.cmd.vsplit)
 vim.keymap.set('n', '<leader>w-', vim.cmd.split)
 vim.keymap.set('n', '<leader>wd', vim.cmd.close)
@@ -321,7 +343,9 @@ vim.keymap.set('n', '<C-Down>', '<cmd>resize -5<cr>', { desc = 'Decrease height'
 vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -5<cr>', { desc = 'Decrease width' })
 vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +5<cr>', { desc = 'Increase width' })
 
--- telescope
+-------------------------------------------------------------------------------
+-- Telescope
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>fn', function()
   local dir = vim.fn.getcwd()
   require('telescope.builtin').find_files({
@@ -339,8 +363,9 @@ vim.keymap.set('n', '<leader>dn', function()
   })
 end, { desc = 'Find directory in cwd' })
 
-
--- yazi
+-------------------------------------------------------------------------------
+-- Yazi
+-------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>no', function()
   local current_file_path = vim.fn.resolve(vim.fn.expand('%:p'))
   require('yazi').yazi(nil, current_file_path, { reveal_path = current_file_path })
@@ -362,7 +387,9 @@ vim.keymap.set('n', '<leader>ne', function()
   require('yazi').yazi(nil, dir)
 end, { desc = 'Open explorer where it was last closed' })
 
--- todos
+-------------------------------------------------------------------------------
+-- Todo
+-------------------------------------------------------------------------------
 local function toggle_todo_line(line)
   if line:match('%[x%]') then
     return (line:gsub('%[x%]', '[ ]', 1))
@@ -414,7 +441,9 @@ _G.__todo_add_range = function() apply_to_visual_selection(add_todo_line) end
 vim.keymap.set('v', '<leader>td', ':<C-u>lua __todo_add_range()<CR>',
   { silent = true, desc = 'Add todo (selection)' })
 
--- folding
+-------------------------------------------------------------------------------
+-- Folding
+-------------------------------------------------------------------------------
 vim.o.foldmethod = 'expr'
 -- Default to treesitter folding
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
