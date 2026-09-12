@@ -71,12 +71,23 @@ end, { desc = 'Copy saved link' })
 -------------------------------------------------------------------------------
 vim.keymap.set('n', '<leader>bx', function()
   local bufnr = vim.api.nvim_get_current_buf()
+
+  if vim.bo[bufnr].modified then
+    vim.notify('Buffer has unsaved changes', vim.log.levels.ERROR)
+    return
+  end
+
   vim.cmd('bp')
   vim.api.nvim_buf_delete(bufnr, {})
 end, { desc = "Delete current buffer safely" })
 vim.keymap.set('n', '<leader>ww', '<cmd>w<cr>', { desc = 'Write file' })
 vim.keymap.set('n', '<leader>wa', '<cmd>wa<cr>', { desc = 'Write all' })
-vim.keymap.set('n', '<leader>qq', '<cmd>qa!<cr>', { desc = 'Quit all' })
+vim.keymap.set('n', '<leader>qq', function()
+  if package.loaded['grug-far'] then
+    pcall(require('grug-far').kill_instance, 'main')
+  end
+  vim.cmd('qa!')
+end, { desc = 'Quit all' })
 
 -------------------------------------------------------------------------------
 -- Neogit
@@ -284,13 +295,10 @@ vim.keymap.set('n', '<Tab>', '<cmd>b#<cr>')
 -------------------------------------------------------------------------------
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down and center' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up and center' })
-vim.keymap.set('n', 'j', 'jzz', { desc = 'Down and center' })
-vim.keymap.set('n', 'k', 'kzz', { desc = 'Up and center' })
 vim.keymap.set('n', 'n', 'nzz', { desc = 'Next match and center' })
 vim.keymap.set('n', 'N', 'Nzz', { desc = 'Prev match and center' })
 
 vim.keymap.set('n', '<leader>gx', '<cmd>tabclose<cr>', { desc = 'Close tab' })
-vim.keymap.set('n', '<leader>gn', '<cmd>tabnew<cr>', { desc = 'New tab' })
 
 -------------------------------------------------------------------------------
 -- Noice
