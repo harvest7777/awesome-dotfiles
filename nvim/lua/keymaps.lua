@@ -325,6 +325,7 @@ vim.keymap.set('n', '<leader>fn', function()
   require('telescope.builtin').find_files({
     prompt_title = 'Find files in ' .. vim.fn.fnamemodify(dir, ':~'),
     cwd = dir,
+    hidden = true,
   })
 end, { desc = 'Find files in cwd' })
 
@@ -344,6 +345,11 @@ vim.keymap.set('n', '<leader>no', function()
   local current_file_path = vim.fn.resolve(vim.fn.expand('%:p'))
   require('yazi').yazi(nil, current_file_path, { reveal_path = current_file_path })
 end, { desc = 'Reveal current file' })
+
+vim.keymap.set('n', '<leader>oo', function()
+  vim.fn.jobstart({ 'open', vim.fn.expand('%:p:h') }, { detach = true })
+end, { desc = 'Open Finder in current file directory' })
+
 local function explorer_root()
   local root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
   return (vim.v.shell_error == 0 and root) or vim.fn.getcwd()
