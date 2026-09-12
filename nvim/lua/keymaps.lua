@@ -18,6 +18,12 @@ local function read_cache(cache_path)
   return data
 end
 
+local function get_pr_link_key()
+  local repository_root = vim.trim(vim.fn.system("git rev-parse --show-toplevel"))
+  local branch_name = vim.trim(vim.fn.system("git rev-parse --abbrev-ref HEAD"))
+  return repository_root .. "-" .. branch_name
+end
+
 vim.keymap.set('n', '<leader>ip', function()
   local opts = { prompt = 'Enter pr link', scope = 'buffer' }
 
@@ -28,11 +34,9 @@ vim.keymap.set('n', '<leader>ip', function()
 
       local data = read_cache(state_path)
 
-      local cwd = vim.fn.getcwd()
-      local branch_name = vim.fn.system("git rev-parse --abbrev-ref HEAD")
-      local cwd_branch_name_key = cwd .. "-" .. branch_name
+      local pr_link_key = get_pr_link_key()
 
-      data[cwd_branch_name_key] = input
+      data[pr_link_key] = input
 
       local f = io.open(state_path, "w")
       if not f then
@@ -46,12 +50,14 @@ vim.keymap.set('n', '<leader>ip', function()
 end, { desc = 'Save PR to branch or worktree' })
 
 vim.keymap.set('n', '<leader>gp', function()
-  local cwd = vim.fn.getcwd()
-  local branch_name = vim.fn.system("git rev-parse --abbrev-ref HEAD")
-  local cwd_branch_name_key = cwd .. "-" .. branch_name
+  local pr_link_key = get_pr_link_key()
   local state_path = vim.fs.joinpath(vim.fn.stdpath("state"), "pr_links.json")
   local data = read_cache(state_path)
-  local pr_link = data[cwd_branch_name_key]
+  local pr_link = data[pr_link_key]
+  if not pr_link then
+    local legacy_key = vim.fn.getcwd() .. "-" .. vim.fn.system("git rev-parse --abbrev-ref HEAD")
+    pr_link = data[legacy_key]
+  end
   if not pr_link then
     vim.notify('No saved link for this branch', vim.log.levels.WARN)
     return
