@@ -7,13 +7,6 @@ return {
   config = function(_, opts)
     require('render-markdown').setup(opts)
 
-    -- RenderMarkdownBullet (list/checkbox icon) and RenderMarkdownTableRow
-    -- both link straight to `Normal`. Catppuccin deliberately makes floats
-    -- a shade darker than regular buffers (NormalFloat != Normal), so
-    -- inside a floating window (e.g. the notes.md float) these paint the
-    -- lighter Normal background instead of matching the float around them
-    -- -- visible light patches right where the icons sit. Clear bg so they
-    -- transparently take on whatever window they're actually drawn in.
     local function fix_float_bg_bleed()
       local fg = vim.api.nvim_get_hl(0, { name = 'Normal' }).fg
       vim.api.nvim_set_hl(0, 'RenderMarkdownBullet', { fg = fg, bg = 'NONE' })

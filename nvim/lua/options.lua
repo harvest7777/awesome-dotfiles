@@ -1,43 +1,28 @@
-vim.opt.showtabline = 2      -- always show tabline (bufferline renders it)
-vim.opt.termguicolors = true -- bufferline needs true color
-
--- line numbers
-vim.opt.number = true         -- show line numbers
-vim.opt.relativenumber = true -- relative numbers (great for jumping)
-
-
--- indentation
-vim.opt.tabstop = 2        -- tab = 2 spaces
-vim.opt.shiftwidth = 2     -- indent = 2 spaces
-vim.opt.expandtab = true   -- use spaces instead of tabs
-vim.opt.smartindent = true -- auto indent new lines
-
--- search
-vim.opt.ignorecase = true -- case insensitive search
-vim.opt.smartcase = true  -- unless you type a capital
-vim.opt.hlsearch = false  -- don't highlight after search is done
-
--- ui
-vim.opt.wrap = false       -- don't wrap long lines
-vim.opt.breakindent = true -- wrapped lines keep the original indent
-vim.opt.scrolloff = 18     -- keep 8 lines above/below cursor
-vim.opt.signcolumn = 'yes' -- always show sign column (prevents jumpiness)
-vim.opt.cursorline = true  -- highlight current line
-vim.opt.cmdheight = 0      -- hides it when not in use
-vim.opt.foldlevel = 99     -- default unfolded
-
--- splits
-vim.opt.splitright = true -- vsplit opens right
-vim.opt.splitbelow = true -- split opens below
-
--- misc
-vim.opt.swapfile = false -- no swap files
-vim.opt.undofile = true  -- persistent undo across sessions
+vim.opt.showtabline = 2
+vim.opt.termguicolors = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.hlsearch = false
+vim.opt.wrap = false
+vim.opt.breakindent = true
+vim.opt.scrolloff = 18
+vim.opt.signcolumn = 'yes'
+vim.opt.cursorline = true
+vim.opt.cmdheight = 0
+vim.opt.foldlevel = 99
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.swapfile = false
+vim.opt.undofile = true -- persistent undo across sessions
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.iskeyword:append("-")
 
--- auto reload
--- need this one for when working with coding agents
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   callback = function()
@@ -45,16 +30,14 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
   end,
 })
 
--- soft wrap prose files at word boundaries
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'markdown', 'text' },
   callback = function()
     vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true -- break at words, not mid-word
+    vim.opt_local.linebreak = true
   end,
 })
 
--- restore cursor position per buffer
 local cursor_positions = {}
 
 vim.api.nvim_create_autocmd('BufLeave', {
@@ -89,10 +72,10 @@ vim.diagnostic.config({
   },
   signs = true,
   underline = true,
-  update_in_insert = false, -- no noise while typing
-  severity_sort = true,     -- errors before warnings
+  update_in_insert = false,
+  severity_sort = true,
   float = {
     border = 'rounded',
-    source = true, -- shows 'pyright' or 'lua_ls' etc
+    source = true,
   },
 })

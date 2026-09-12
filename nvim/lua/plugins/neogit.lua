@@ -3,23 +3,18 @@ return
   "NeogitOrg/neogit",
   lazy = true,
   dependencies = {
-    -- Only one of these is needed.
-    "sindrets/diffview.nvim",   -- optional
-    "esmuellert/codediff.nvim", -- optional
+    "sindrets/diffview.nvim",
+    "esmuellert/codediff.nvim",
 
-    -- For a custom log pager
-    "m00qek/baleia.nvim", -- optional
+    "m00qek/baleia.nvim",
 
-    -- Only one of these is needed.
-    "nvim-telescope/telescope.nvim", -- optional
-    "ibhagwan/fzf-lua",              -- optional
-    "nvim-mini/mini.pick",           -- optional
-    "folke/snacks.nvim",             -- optional
+    "nvim-telescope/telescope.nvim",
+    "ibhagwan/fzf-lua",
+    "nvim-mini/mini.pick",
+    "folke/snacks.nvim",
   },
   cmd = "Neogit",
   opts = {
-    -- <cr> on a commit opens it in place instead of splitting.
-    -- Default is "vsplit"; "replace" reuses the current window.
     commit_view = {
       kind = "replace",
     },

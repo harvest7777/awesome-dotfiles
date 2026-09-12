@@ -1,4 +1,3 @@
--- remember where yazi was when it was last closed, so <leader>ne can resume there
 local function remember_last_directory(state)
   local dir = state and state.last_directory and state.last_directory.filename
   if dir and vim.fn.isdirectory(dir) == 1 then

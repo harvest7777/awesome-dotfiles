@@ -47,10 +47,8 @@ end, { desc = 'Save PR to branch or worktree' })
 
 vim.keymap.set('n', '<leader>gp', function()
   local cwd = vim.fn.getcwd()
-  -- a combination of cwd/branch is guaranteed to be unique
   local branch_name = vim.fn.system("git rev-parse --abbrev-ref HEAD")
   local cwd_branch_name_key = cwd .. "-" .. branch_name
-  -- need to save that bitch somewhere
   local state_path = vim.fs.joinpath(vim.fn.stdpath("state"), "pr_links.json")
   local data = read_cache(state_path)
   local pr_link = data[cwd_branch_name_key]
@@ -77,10 +75,6 @@ vim.keymap.set('n', '<leader>qq', '<cmd>qa!<cr>', { desc = 'Quit all' })
 -------------------------------------------------------------------------------
 -- Neogit
 -------------------------------------------------------------------------------
--- Neogit's "view file at old commit" buffers are named
--- neogit://<sha>/<path-relative-to-repo-root>, not a real filesystem path,
--- so expand("%:p") on them just returns garbage. Resolve to the real path
--- on disk in that case; everywhere else, behave exactly as before.
 local function real_path_for_current_buffer()
   local name = vim.api.nvim_buf_get_name(0)
   local rel = name:match("^neogit://[^/]+/(.+)$")
@@ -112,8 +106,6 @@ vim.keymap.set('n', '<leader>nf', function()
   end
   local cursor = vim.api.nvim_win_get_cursor(0)
   vim.cmd('edit ' .. vim.fn.fnameescape(real))
-  -- The historical version can have a different line count/content than
-  -- HEAD, so clamp to whatever's actually in the real file.
   local line = math.min(cursor[1], vim.api.nvim_buf_line_count(0))
   local line_text = vim.api.nvim_buf_get_lines(0, line - 1, line, false)[1] or ""
   local col = math.min(cursor[2], #line_text)
@@ -123,10 +115,6 @@ end, { desc = 'Open real file from Neogit commit preview' })
 -------------------------------------------------------------------------------
 -- Notes
 -------------------------------------------------------------------------------
--- Per-worktree scratch notes, kept in ~/notes/ so they survive both editor
--- restarts and /tmp getting cleared on reboot. One file per worktree root
--- (not per branch) since a worktree checkout IS effectively the branch in
--- this workflow.
 local function notes_path()
   local root = vim.trim(vim.fn.system("git rev-parse --show-toplevel"))
   local key = (vim.v.shell_error == 0 and root ~= "") and root
@@ -137,10 +125,6 @@ local function notes_path()
   return vim.fs.joinpath(notes_dir, key .. "-notes.md")
 end
 
--- Track cursor position for notes files ourselves rather than relying on
--- Neovim's native '\" mark restore -- that's still subject to 'shada's
--- `'50` remembered-files cap and silently drops entries once you've edited
--- enough other files, which would be an easy way to lose this quietly.
 local notes_cursor_cache_path = vim.fs.joinpath(vim.fn.stdpath("state"), "notes_cursor.json")
 
 local function read_notes_cursor_cache()
@@ -171,14 +155,6 @@ local function save_notes_cursor(path, cursor)
   f:close()
 end
 
--- Safety net for quitting outright while the notes float is still open and
--- was never otherwise left (BufWinLeave doesn't reliably fire for the last
--- window closed on :qa).
--- Also autosaves any dirty notes buffer on the way out -- covers `:qa`
--- (bang skips the usual "unsaved changes" prompt, so without this an edit
--- would just be silently discarded) as well as a notes buffer left dirty
--- and hidden (bufhidden/'hidden' keeps it loaded but off-screen) from
--- earlier in the session.
 vim.api.nvim_create_autocmd("VimLeavePre", {
   callback = function()
     for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -230,13 +206,6 @@ vim.keymap.set('n', '<leader>md', function()
     title = " Notes ",
     title_pos = "center",
   })
-  -- render-markdown pads checkbox/bullet icons with a highlight it expects
-  -- to match the surrounding background (default: 'Normal'), and it only
-  -- auto-switches that to NormalFloat for buftype=nofile scratch buffers --
-  -- notes.md is a real file buffer, so that built-in override doesn't
-  -- apply. Remap Normal -> NormalFloat for just this window instead of
-  -- changing render-markdown's global config, which would break the match
-  -- for any regular, non-floating markdown buffer.
   vim.wo[notes_win].winhighlight = "Normal:NormalFloat"
   vim.wo[notes_win].wrap = true
   vim.wo[notes_win].linebreak = true
@@ -255,9 +224,6 @@ vim.keymap.set('n', '<leader>md', function()
     buffer = buf,
     callback = function()
       pcall(save_notes_cursor, path, vim.api.nvim_win_get_cursor(0))
-      -- Still the current buffer/window at this point (BufWinLeave fires
-      -- just before leaving), so a plain :write covers however you left --
-      -- q, <Esc>, or switching windows some other way.
       if vim.bo[buf].modified then
         pcall(vim.cmd, "write")
       end
@@ -305,7 +271,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -------------------------------------------------------------------------------
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- close the current buffer without closing the window
 vim.keymap.set('n', '<Tab>', '<cmd>b#<cr>')
 
 -------------------------------------------------------------------------------
@@ -335,14 +300,12 @@ vim.keymap.set('n', '<leader>w|', vim.cmd.vsplit)
 vim.keymap.set('n', '<leader>w-', vim.cmd.split)
 vim.keymap.set('n', '<leader>wd', vim.cmd.close)
 
--- window navigation
 vim.keymap.set('n', '<leader>wn', '<C-w>w')
 vim.keymap.set('n', '<leader>wh', '<C-w>h')
 vim.keymap.set('n', '<leader>wj', '<C-w>j')
 vim.keymap.set('n', '<leader>wk', '<C-w>k')
 vim.keymap.set('n', '<leader>wl', '<C-w>l')
 
--- window resizing
 vim.keymap.set('n', '<C-Up>', '<cmd>resize +5<cr>', { desc = 'Increase height' })
 vim.keymap.set('n', '<C-Down>', '<cmd>resize -5<cr>', { desc = 'Decrease height' })
 vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -5<cr>', { desc = 'Decrease width' })
@@ -450,9 +413,7 @@ vim.keymap.set('v', '<leader>td', ':<C-u>lua __todo_add_range()<CR>',
 -- Folding
 -------------------------------------------------------------------------------
 vim.o.foldmethod = 'expr'
--- Default to treesitter folding
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- Prefer LSP folding if client supports it
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
