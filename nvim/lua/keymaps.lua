@@ -53,7 +53,7 @@ vim.keymap.set('n', '<leader>gp', function()
   local pr_link = data[cwd_branch_name_key]
   vim.fn.setreg("+", pr_link)
   vim.notify('Copied ' .. pr_link)
-end, { desc = 'Save PR to branch or worktree' })
+end, { desc = 'Copy saved link' })
 
 -- misc
 vim.keymap.set('n', '<leader>bx', function()

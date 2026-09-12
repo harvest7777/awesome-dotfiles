@@ -4,3 +4,5 @@ return
   event = 'VeryLazy',
   config = true,
 }
+
+-- this makes pastes indent properly

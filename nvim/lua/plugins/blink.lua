@@ -30,8 +30,6 @@ return
     -- (Default) Only show the documentation popup when manually triggered
     completion = { documentation = { auto_show = false } },
 
-    -- LuaSnip drives expansion so the latex math autosnippets in lua/snippets
-    -- and blink's completion menu share one snippet engine
     snippets = { preset = 'luasnip' },
     signature = {
       enabled = true,

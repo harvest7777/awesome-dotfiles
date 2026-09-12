@@ -37,6 +37,7 @@ vim.opt.clipboard = 'unnamedplus'
 vim.opt.iskeyword:append("-")
 
 -- auto reload
+-- need this one for when working with coding agents
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   callback = function()
