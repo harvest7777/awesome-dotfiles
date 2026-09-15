@@ -15,6 +15,7 @@ return {
 
     -- friendly-snippets (already a blink dependency) is in the vscode format
     require('luasnip.loaders.from_vscode').lazy_load()
+    ls.filetype_extend('cpp', { 'c' })
     vim.keymap.set({ 'i', 's' }, '<C-l>', function()
       if ls.choice_active() then ls.change_choice(1) end
     end, { desc = 'LuaSnip: next choice' })
