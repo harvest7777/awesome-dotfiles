@@ -127,13 +127,13 @@ local function shell_escape_path(path)
 end
 
 vim.keymap.set('n', '<leader>p', function()
-  vim.fn.setreg("+", shell_escape_path(real_path_for_current_buffer() or vim.fn.expand("%:p")))
+  vim.fn.setreg("+", real_path_for_current_buffer() or vim.fn.expand("%:p"))
 end, { desc = 'Copy absolute path' })
 
 vim.keymap.set('n', '<leader>P', function()
   local abs = real_path_for_current_buffer()
   local rel = abs and vim.fn.fnamemodify(abs, ":~:.") or vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
-  vim.fn.setreg("+", shell_escape_path(rel))
+  vim.fn.setreg("+", rel)
 end, { desc = 'Copy relative path' })
 
 vim.keymap.set('n', '<leader>d', function()
