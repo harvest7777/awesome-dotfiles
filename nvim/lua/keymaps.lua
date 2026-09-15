@@ -136,6 +136,11 @@ vim.keymap.set('n', '<leader>P', function()
   vim.fn.setreg("+", shell_escape_path(rel))
 end, { desc = 'Copy relative path' })
 
+vim.keymap.set('n', '<leader>d', function()
+  local abs = real_path_for_current_buffer() or vim.fn.expand("%:p")
+  vim.fn.setreg("+", shell_escape_path(vim.fn.fnamemodify(abs, ":h")))
+end, { desc = 'Copy directory path' })
+
 vim.keymap.set('n', '<leader>nf', function()
   local real = real_path_for_current_buffer()
   if not real then
