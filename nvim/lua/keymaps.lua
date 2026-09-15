@@ -88,6 +88,22 @@ vim.keymap.set('n', '<leader>qq', function()
   end
   vim.cmd('qa!')
 end, { desc = 'Quit all' })
+vim.keymap.set('n', '<leader>cc', function()
+  vim.cmd('write')
+  local src = vim.fn.expand('%:t')
+  local out = vim.fn.expand('%:t:r')
+  vim.system({ 'clang++', '-std=c++17', '-stdlib=libc++', src, '-o', out },
+    { cwd = vim.fn.expand('%:p:h'), text = true },
+    function(res)
+      vim.schedule(function()
+        if res.code == 0 then
+          vim.notify('Compiled ' .. out)
+        else
+          vim.notify(res.stderr, vim.log.levels.ERROR)
+        end
+      end)
+    end)
+end, { desc = 'Compile current C++ file' })
 
 -------------------------------------------------------------------------------
 -- Neogit
