@@ -360,6 +360,8 @@ vim.keymap.set('n', '<leader>fn', function()
     prompt_title = 'Find files in ' .. vim.fn.fnamemodify(dir, ':~'),
     cwd = dir,
     hidden = true,
+    -- hidden = true would otherwise drag in every object under .git/
+    file_ignore_patterns = { '^%.git/', '/%.git/' },
   })
 end, { desc = 'Find files in cwd' })
 
