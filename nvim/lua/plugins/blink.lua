@@ -19,7 +19,11 @@ return
       nerd_font_variant = 'mono'
     },
 
-    completion = { documentation = { auto_show = false } },
+    completion = {
+      list = { selection = { preselect = false, auto_insert = false } },
+      menu = { border = 'rounded' },
+      documentation = { auto_show = false, window = { border = 'rounded' } },
+    },
 
     snippets = { preset = 'luasnip' },
     signature = {
