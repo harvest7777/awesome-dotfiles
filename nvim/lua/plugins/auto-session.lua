@@ -11,6 +11,13 @@ return {
       end,
     })
 
+    -- mksession saves the arglist, so a file passed on the command line once
+    -- gets re-added as a buffer on every restore even after closing it.
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'PersistenceSavePre',
+      callback = function() vim.cmd('%argdelete') end,
+    })
+
     vim.api.nvim_create_autocmd('VimEnter', {
       nested = true,
       callback = function()
