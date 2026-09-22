@@ -20,11 +20,8 @@ return {
     }
   end,
   keys = {
-    { '<leader>ll', '<cmd>VimtexCompile<cr>',   ft = 'tex', desc = 'LaTeX: toggle continuous compile' },
-    { '<leader>lv', '<cmd>VimtexView<cr>',      ft = 'tex', desc = 'LaTeX: view PDF' },
-    { '<leader>le', '<cmd>VimtexErrors<cr>',    ft = 'tex', desc = 'LaTeX: errors' },
-    { '<leader>lt', '<cmd>VimtexTocToggle<cr>', ft = 'tex', desc = 'LaTeX: table of contents' },
-    { '<leader>lc', '<cmd>VimtexClean<cr>',     ft = 'tex', desc = 'LaTeX: clean aux files' },
-    { '<leader>ls', '<cmd>VimtexStop<cr>',      ft = 'tex', desc = 'LaTeX: stop compile' },
+    { '<leader>ll', '<cmd>VimtexCompile<cr>', ft = 'tex', desc = 'LaTeX: toggle continuous compile' },
+    { '<leader>lv', '<cmd>VimtexView<cr>',    ft = 'tex', desc = 'LaTeX: view PDF' },
+    { '<leader>le', '<cmd>VimtexErrors<cr>',  ft = 'tex', desc = 'LaTeX: errors' },
   },
 }
