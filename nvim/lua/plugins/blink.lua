@@ -13,8 +13,6 @@ return
         ['<C-Space>'] = {},
       },
 
-    enabled = function() return not vim.tbl_contains({ "text", "markdown" }, vim.bo.filetype) end,
-
     appearance = {
       nerd_font_variant = 'mono'
     },
