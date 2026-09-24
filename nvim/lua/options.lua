@@ -35,9 +35,6 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.linebreak = true
-    -- blink is disabled here, so fall back to built-in <C-n> style popup
-    vim.opt_local.autocomplete = true
-    vim.opt_local.completeopt = 'menuone,noselect,popup'
   end,
 })
 
