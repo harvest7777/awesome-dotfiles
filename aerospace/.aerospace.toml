@@ -99,7 +99,7 @@ run = 'layout floating'
     inner.vertical =   10
     outer.left =       6
     outer.bottom =     6
-    outer.top =        46
+    outer.top =        14
     outer.right =      6
 
 # 'main' binding mode declaration
