@@ -137,6 +137,7 @@ run = 'layout floating'
     alt-slash = 'layout tiles horizontal vertical'
     alt-z = 'fullscreen'
     alt-equal = 'balance-sizes'
+    alt-y = 'exec-and-forget /Users/ryantran/Developer/dotfiles/aerospace/todo-popup.sh'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
     alt-h = 'focus left'
