@@ -21,7 +21,7 @@ if ! pgrep -qf -- "$MARK"; then
   # document to run in a shell instead of an argument to nvim
   open -na Ghostty --args "$MARK" --window-save-state=never \
     --quit-after-last-window-closed=true \
-    --window-width=64 --window-height=21 \
+    --window-width=64 --window-height=21 --macos-titlebar-style=hidden \
     "--initial-command=/opt/homebrew/bin/nvim $TODO"
   for _ in $(seq 20); do
     id=$(window_id) && [ -n "$id" ] && break
