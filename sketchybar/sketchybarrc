@@ -81,7 +81,7 @@ sketchybar --add item chevron left \
 
 sketchybar --add item clock right \
            --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
-                 popup.align=right popup.height=24 popup.blur_radius=30 \
+                 popup.align=right popup.height=8 popup.y_offset=7 popup.blur_radius=30 \
                  popup.background.color=0xf01a2f4a \
                  popup.background.corner_radius=8 \
                  popup.background.border_width=1 \
@@ -102,34 +102,39 @@ sketchybar --add event spotify_change com.spotify.client.PlaybackStateChanged \
 
 ##### Calendar Popup #####
 # Rows of the clock's calendar popup and today's events, filled in by
-# plugins/calendar.sh on click.
+# plugins/calendar.sh on click. popup.height is small so the pad rows stay
+# thin; every other row gets its height from a transparent background.
 
-cal_row=(
+cal_item=(
   icon.drawing=off
   label.font="Hack Nerd Font:Bold:14.0"
+  background.drawing=on
   background.color=0x00000000
-  background.border_color=0xfff2c4b0
-  background.border_width=2
-  background.corner_radius=4
-  background.height=20
+  background.height=24
   padding_left=10
   padding_right=10
 )
-sketchybar --add item cal.title popup.clock \
-           --set cal.title icon.drawing=off label.font="Hack Nerd Font:Bold:15.0" \
-                 padding_left=10
+cal_row=(
+  "${cal_item[@]}"
+  background.border_color=0xfff2c4b0
+  background.border_width=0
+  background.corner_radius=4
+)
+cal_pad=(icon.drawing=off label.drawing=off)
+
+sketchybar --add item cal.pad_top popup.clock --set cal.pad_top "${cal_pad[@]}" \
+           --add item cal.title popup.clock --set cal.title "${cal_item[@]}"
 for i in 0 1 2 3 4 5 6; do
   sketchybar --add item cal.$i popup.clock --set cal.$i "${cal_row[@]}"
 done
 
 sketchybar --add item cal.events_title popup.clock \
-           --set cal.events_title icon.drawing=off label="Today" \
-                 label.font="Hack Nerd Font:Bold:15.0" padding_left=10
+           --set cal.events_title "${cal_item[@]}" label="Today"
 for i in 0 1 2 3 4 5; do
   sketchybar --add item cal.event.$i popup.clock \
-             --set cal.event.$i icon.drawing=off drawing=off \
-                   label.font="Hack Nerd Font:Regular:13.0" padding_left=10 padding_right=10
+             --set cal.event.$i "${cal_item[@]}" drawing=off
 done
+sketchybar --add item cal.pad_bottom popup.clock --set cal.pad_bottom "${cal_pad[@]}"
 
 ##### Item Groups #####
 # The bar itself is transparent; each side's items sit on a rounded pill.
