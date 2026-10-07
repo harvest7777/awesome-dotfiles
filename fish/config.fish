@@ -32,6 +32,8 @@ end
 alias k="kubectl"
 
 if status is-interactive
+    # Before atuin so atuin keeps ctrl-r
+    fzf --fish | source
     fish_add_path -g $HOME/.atuin/bin
     atuin init fish | source
 end
