@@ -63,7 +63,8 @@
   ],
   "logo": {
     "padding": {
-      "top": 2
+      "top": 2,
+      "left": 4
     }
   }
 }
