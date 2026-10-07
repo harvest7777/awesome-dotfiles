@@ -98,8 +98,8 @@ run = 'layout floating'
 
 
 [gaps]
-    inner.horizontal = 10
-    inner.vertical =   10
+    inner.horizontal = 12
+    inner.vertical =   12
     outer.left =       11
     outer.bottom =     11
     outer.top =        21
