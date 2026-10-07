@@ -13,6 +13,7 @@
     { "type": "terminal", "key": "term", "format": "{pretty-name}" },
     { "type": "shell", "key": "shell", "format": "{pretty-name}" },
     { "type": "memory", "key": "mem" },
-    { "type": "uptime", "key": "uptime" }
+    { "type": "uptime", "key": "uptime" },
+    { "type": "battery", "key": "battery" }
   ]
 }
