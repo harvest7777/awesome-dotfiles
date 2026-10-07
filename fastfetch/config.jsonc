@@ -4,6 +4,7 @@
     "separator": " :: "
   },
   "modules": [
+    "break",
     "title",
     "break",
     {
@@ -54,6 +55,13 @@
     {
       "type": "custom",
       "format": "└────────────────────────────────────┘"
+    },
+    "break",
+    "break"
+  ],
+  "logo": {
+    "padding": {
+      "top": 1
     }
-  ]
+  }
 }
