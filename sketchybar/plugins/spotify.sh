@@ -4,8 +4,8 @@
 # Spotify stops. On spotify_change, $INFO holds the PlaybackStateChanged
 # payload as JSON.
 
-PLAYING_COLOR=0xffffffff
-PAUSED_COLOR=0x80ffffff
+PLAYING_COLOR=0xff1f1f28
+PAUSED_COLOR=0x801f1f28
 
 if [ "$SENDER" = "spotify_change" ]; then
   state=$(echo "$INFO" | jq -r '."Player State"')
