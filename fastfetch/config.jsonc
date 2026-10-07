@@ -18,7 +18,7 @@
     {
       "type": "battery",
       "key": "  󰁹",
-      "format": "{capacity} · {time-formatted} left"
+      "format": "{capacity}{?time-formatted} · {time-formatted} left{?}"
     },
     "break",
     {
