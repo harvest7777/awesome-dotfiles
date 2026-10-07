@@ -100,10 +100,10 @@ run = 'layout floating'
 [gaps]
     inner.horizontal = 10
     inner.vertical =   10
-    outer.left =       6
-    outer.bottom =     6
-    outer.top =        14
-    outer.right =      6
+    outer.left =       11
+    outer.bottom =     11
+    outer.top =        19
+    outer.right =      11
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
