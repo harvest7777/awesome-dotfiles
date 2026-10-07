@@ -12,7 +12,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=40 blur_radius=30 color=0xa01a2f4a
+sketchybar --bar position=top height=40 color=0x00000000
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -127,6 +127,19 @@ for i in 0 1 2 3 4 5; do
              --set cal.event.$i icon.drawing=off drawing=off \
                    label.font="Hack Nerd Font:Regular:13.0" padding_left=10 padding_right=10
 done
+
+##### Item Groups #####
+# The bar itself is transparent; each side's items sit on a rounded pill.
+
+group=(
+  background.color=0xd01a2f4a
+  background.corner_radius=10
+  background.height=30
+)
+sketchybar --add bracket left_group workspace chevron front_app \
+           --set left_group "${group[@]}" \
+           --add bracket right_group clock volume battery spotify \
+           --set right_group "${group[@]}"
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
