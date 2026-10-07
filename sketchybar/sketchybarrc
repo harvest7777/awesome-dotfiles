@@ -60,7 +60,7 @@ sketchybar --add item chevron left \
            --set chevron icon=🪿 label.drawing=off \
            --add item front_app left \
            --set front_app icon.drawing=on icon.background.drawing=on \
-                 icon.background.image.scale=0.8 icon.width=26 icon.padding_right=6 \
+                 icon.background.image.scale=0.95 icon.width=31 icon.padding_right=6 \
                  script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
