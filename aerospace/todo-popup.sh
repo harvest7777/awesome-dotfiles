@@ -7,7 +7,9 @@
 export PATH="/opt/homebrew/bin:$PATH"
 
 TODO=/Users/ryantran/Documents/scratch/todo.md
-MARK=--title=todo-popup
+# The pop-up's Ghostty is the only one launched with this, so it doubles as
+# the marker for finding its process
+MARK="--initial-command=/opt/homebrew/bin/nvim $TODO"
 
 window_id() {
   local pid
@@ -19,10 +21,9 @@ window_id() {
 if ! pgrep -qf -- "$MARK"; then
   # Not -e: launched through `open`, Ghostty treats a trailing path as a
   # document to run in a shell instead of an argument to nvim
-  open -na Ghostty --args "$MARK" --window-save-state=never \
+  open -na Ghostty --args --window-save-state=never \
     --quit-after-last-window-closed=true \
-    --window-width=64 --window-height=21 --macos-titlebar-style=hidden \
-    "--initial-command=/opt/homebrew/bin/nvim $TODO"
+    --window-width=64 --window-height=21 "$MARK"
   for _ in $(seq 20); do
     id=$(window_id) && [ -n "$id" ] && break
     sleep 0.1
