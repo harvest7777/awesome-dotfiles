@@ -6,5 +6,6 @@
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
 if [ "$SENDER" = "front_app_switched" ]; then
-  sketchybar --set "$NAME" label="$INFO"
+  bundle_id=$(lsappinfo info -only bundleid "$INFO" | cut -d'"' -f4)
+  sketchybar --set "$NAME" label="$INFO" icon.background.image="app.$bundle_id"
 fi
