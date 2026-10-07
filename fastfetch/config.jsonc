@@ -6,8 +6,6 @@
   "modules": [
     "break",
     "break",
-    "title",
-    "break",
     {
       "type": "custom",
       "format": "┌───────────── hardware ─────────────┐"
@@ -57,6 +55,8 @@
       "type": "custom",
       "format": "└────────────────────────────────────┘"
     },
+    "break",
+    "break",
     "break",
     "break",
     "break"
