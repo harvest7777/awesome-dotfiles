@@ -6,6 +6,8 @@
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
 if [ "$SENDER" = "front_app_switched" ]; then
-  bundle_id=$(lsappinfo info -only bundleid "$INFO" | cut -d'"' -f4)
+  # Look up the frontmost app directly; by name is ambiguous (e.g. Chrome's
+  # notification helper is also called "Google Chrome")
+  bundle_id=$(lsappinfo info -only bundleid "$(lsappinfo front)" | cut -d'"' -f4)
   sketchybar --set "$NAME" label="$INFO" icon.background.image="app.$bundle_id"
 fi
