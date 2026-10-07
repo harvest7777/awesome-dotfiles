@@ -135,7 +135,7 @@ done
 group=(
   background.color=0xd01a2f4a
   background.corner_radius=10
-  background.height=30
+  background.height=32
 )
 sketchybar --add bracket left_group workspace chevron front_app \
            --set left_group "${group[@]}" \
