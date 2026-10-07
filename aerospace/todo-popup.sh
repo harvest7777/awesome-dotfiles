@@ -21,12 +21,20 @@ if ! pgrep -qf -- "$MARK"; then
   # document to run in a shell instead of an argument to nvim
   open -na Ghostty --args "$MARK" --window-save-state=never \
     --quit-after-last-window-closed=true \
+    --window-width=64 --window-height=21 \
     "--initial-command=/opt/homebrew/bin/nvim $TODO"
   for _ in $(seq 20); do
     id=$(window_id) && [ -n "$id" ] && break
     sleep 0.1
   done
   [ -n "$id" ] && aerospace layout --window-id "$id" floating
+  # Center it on screen
+  osascript -e "
+    tell application \"Finder\" to set {_, _, sw, sh} to bounds of window of desktop
+    tell application \"System Events\" to tell (first process whose unix id is $(pgrep -f -- "$MARK" | head -1))
+      set {w, h} to size of window 1
+      set position of window 1 to {(sw - w) / 2, (sh - h) / 2}
+    end tell"
   exit
 fi
 
