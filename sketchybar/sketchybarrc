@@ -88,6 +88,12 @@ sketchybar --add item clock right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change
 
+sketchybar --add event spotify_change com.spotify.client.PlaybackStateChanged \
+           --add item spotify right \
+           --set spotify icon=󰓇 label.max_chars=40 drawing=off \
+                 script="$PLUGIN_DIR/spotify.sh" \
+           --subscribe spotify spotify_change
+
 ##### Calendar Popup #####
 # Rows of the clock's calendar popup and today's events, filled in by
 # plugins/calendar.sh on click.
