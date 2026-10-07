@@ -32,7 +32,7 @@ end
 alias k="kubectl"
 
 if status is-interactive
-    fish_add_path $HOME/.atuin/bin
+    fish_add_path -g $HOME/.atuin/bin
     atuin init fish | source
 end
 
