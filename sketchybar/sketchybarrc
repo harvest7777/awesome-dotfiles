@@ -46,6 +46,7 @@ workspace=(
   icon.color=0xff1a2f4a
   background.corner_radius=5
   background.height=25
+  padding_left=3
   label.drawing=off
   script="$PLUGIN_DIR/aerospace.sh"
 )
@@ -134,7 +135,7 @@ done
 group=(
   background.color=0xd01a2f4a
   background.corner_radius=10
-  background.height=35
+  background.height=30
 )
 sketchybar --add bracket left_group workspace chevron front_app \
            --set left_group "${group[@]}" \
