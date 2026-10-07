@@ -18,6 +18,6 @@ case "$SENDER" in
     sketchybar --set "$NAME" popup.drawing=off
     ;;
   *)
-    sketchybar --set "$NAME" label="$(date '+%d/%m %-I:%M %p')"
+    sketchybar --set "$NAME" label="$(date '+%b %-d %-I:%M %p')"
     ;;
 esac
