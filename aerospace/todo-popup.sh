@@ -17,7 +17,11 @@ window_id() {
 }
 
 if ! pgrep -qf -- "$MARK"; then
-  open -na Ghostty --args "$MARK" --window-save-state=never -e nvim "$TODO"
+  # Not -e: launched through `open`, Ghostty treats a trailing path as a
+  # document to run in a shell instead of an argument to nvim
+  open -na Ghostty --args "$MARK" --window-save-state=never \
+    --quit-after-last-window-closed=true \
+    "--initial-command=/opt/homebrew/bin/nvim $TODO"
   for _ in $(seq 20); do
     id=$(window_id) && [ -n "$id" ] && break
     sleep 0.1
