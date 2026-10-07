@@ -3,3 +3,4 @@ background-opacity = 0.85
 background-blur = 20
 title = " "
 macos-titlebar-proxy-icon = hidden
+confirm-close-surface = false
