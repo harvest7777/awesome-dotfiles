@@ -12,7 +12,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top height=40 blur_radius=30 color=0xb0ffffff
+sketchybar --bar position=top height=40 blur_radius=30 color=0xa01a2f4a
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -24,8 +24,8 @@ default=(
   padding_right=5
   icon.font="Hack Nerd Font:Bold:17.0"
   label.font="Hack Nerd Font:Bold:16.0"
-  icon.color=0xff1f1f28
-  label.color=0xff1f1f28
+  icon.color=0xfff5e6dc
+  label.color=0xfff5e6dc
   icon.padding_left=4
   icon.padding_right=4
   label.padding_left=4
@@ -42,7 +42,8 @@ sketchybar --add event aerospace_workspace_change
 workspace=(
   icon.padding_left=7
   icon.padding_right=7
-  background.color=0x26000000
+  background.color=0xfff2c4b0
+  icon.color=0xff1a2f4a
   background.corner_radius=5
   background.height=25
   label.drawing=off
@@ -78,10 +79,10 @@ sketchybar --add item chevron left \
 sketchybar --add item clock right \
            --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
                  popup.align=right popup.height=24 popup.blur_radius=30 \
-                 popup.background.color=0xf2ffffff \
+                 popup.background.color=0xf01a2f4a \
                  popup.background.corner_radius=8 \
                  popup.background.border_width=1 \
-                 popup.background.border_color=0x26000000 \
+                 popup.background.border_color=0x60f2c4b0 \
            --subscribe clock mouse.clicked mouse.exited.global \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
@@ -103,7 +104,9 @@ sketchybar --add event spotify_change com.spotify.client.PlaybackStateChanged \
 cal_row=(
   icon.drawing=off
   label.font="Hack Nerd Font:Bold:14.0"
-  background.color=0x30000000
+  background.color=0x00000000
+  background.border_color=0xfff2c4b0
+  background.border_width=2
   background.corner_radius=4
   background.height=20
   padding_left=10
