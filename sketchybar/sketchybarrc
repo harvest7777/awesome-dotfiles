@@ -66,7 +66,7 @@ sketchybar --add item chevron left \
                  script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched \
            --add item sparkles left \
-           --set sparkles icon.drawing=off label=". ݁₊ ⊹ . ݁˖ . ݁"
+           --set sparkles icon.drawing=off label="⋆˙⟡ ⋆.˚ ⊹₊⟡ ⋆"
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
