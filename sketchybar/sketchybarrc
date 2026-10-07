@@ -128,7 +128,8 @@ for i in 0 1 2 3 4 5 6; do
   sketchybar --add item cal.$i popup.clock --set cal.$i "${cal_row[@]}"
 done
 
-sketchybar --add item cal.events_title popup.clock \
+sketchybar --add item cal.pad_mid popup.clock --set cal.pad_mid "${cal_pad[@]}" \
+           --add item cal.events_title popup.clock \
            --set cal.events_title "${cal_item[@]}" label="Today"
 for i in 0 1 2 3 4 5; do
   sketchybar --add item cal.event.$i popup.clock \

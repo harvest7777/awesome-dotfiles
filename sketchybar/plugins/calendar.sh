@@ -6,7 +6,7 @@
 # the item is narrowed to one day cell and the background shifted under
 # today's column, while the label keeps drawing past the item's width.
 # When an event is wider than the calendar, the calendar shifts to stay
-# centered in the popup.
+# centered in the popup; the headings are always centered.
 
 CHAR_W=8.4 # Hack Nerd Font Bold 14
 CELL_W=25
@@ -33,7 +33,12 @@ for event in "${events[@]}"; do
 done
 shift=$(px "$(echo "($widest - $CAL_CHARS) / 2" | bc -l)")
 
-sketchybar --set cal.title label="$(date '+%B %Y')" label.padding_left="$shift"
+# Center a heading across the popup's widest row
+center() { px "$(echo "($widest - ${#1}) / 2" | bc -l)"; }
+
+title="$(date '+%B %Y')"
+sketchybar --set cal.title label="$title" label.padding_left="$(center "$title")" \
+           --set cal.events_title label.padding_left="$(center Today)"
 
 today=$(date +%-d)
 first_dow=$(date -j -f %Y-%m-%d "$(date +%Y-%m-01)" +%w)
