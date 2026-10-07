@@ -64,7 +64,9 @@ sketchybar --add item chevron left \
            --set front_app icon.drawing=on icon.background.drawing=on \
                  icon.background.image.scale=0.95 icon.width=31 icon.padding_right=6 \
                  script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
+           --subscribe front_app front_app_switched \
+           --add item sparkles left \
+           --set sparkles icon.drawing=off label=". ݁₊ ⊹ . ݁˖ . ݁"
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
@@ -137,7 +139,7 @@ group=(
   background.corner_radius=10
   background.height=32
 )
-sketchybar --add bracket left_group workspace chevron front_app \
+sketchybar --add bracket left_group workspace chevron front_app sparkles \
            --set left_group "${group[@]}" \
            --add bracket right_group clock volume battery spotify \
            --set right_group "${group[@]}"
