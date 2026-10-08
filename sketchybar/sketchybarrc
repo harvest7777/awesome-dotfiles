@@ -73,7 +73,7 @@ sketchybar --add item chevron left \
            --subscribe wifi wifi_change system_woke \
            --add item bluetooth left \
            --set bluetooth update_freq=10 script="$PLUGIN_DIR/bluetooth.sh" \
-           --subscribe bluetooth system_woke mouse.clicked mouse.exited.global
+           --subscribe bluetooth system_woke mouse.clicked mouse.exited mouse.exited.global
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
@@ -93,7 +93,7 @@ sketchybar --add item clock right \
                  popup.background.corner_radius=8 \
                  popup.background.border_width=1 \
                  popup.background.border_color=0x60f2c4b0 \
-           --subscribe clock mouse.clicked mouse.exited.global \
+           --subscribe clock mouse.clicked mouse.exited mouse.exited.global \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \

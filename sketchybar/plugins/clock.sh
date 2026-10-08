@@ -14,6 +14,9 @@ case "$SENDER" in
       sketchybar --set "$NAME" popup.drawing=on
     fi
     ;;
+  mouse.exited)
+    "$CONFIG_DIR/plugins/popup_autoclose.py" "$NAME" >/dev/null 2>&1 &
+    ;;
   mouse.exited.global)
     sketchybar --set "$NAME" popup.drawing=off
     ;;

@@ -6,6 +6,11 @@
 BLUEUTIL=/opt/homebrew/bin/blueutil
 MAX_DEVICES=8
 
+if [ "$SENDER" = "mouse.exited" ]; then
+  "$CONFIG_DIR/plugins/popup_autoclose.py" "$NAME" >/dev/null 2>&1 &
+  exit 0
+fi
+
 devices=()
 if [ "$($BLUEUTIL --power)" = "1" ]; then
   power=on
