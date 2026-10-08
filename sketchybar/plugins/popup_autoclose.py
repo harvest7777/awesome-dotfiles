@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Closes item $1's popup once the mouse leaves the item without going into
-the popup. Started on the item's mouse.exited: sketchybar's
+"""Closes item $1's popup once the mouse leaves the bar's pills without going
+into the popup. Started on the item's mouse.exited: sketchybar's
 mouse.exited.global only fires after the mouse has been inside the popup.
 
-The popup stays open while the mouse is back on the item, inside the popup,
-or crossing the gap between them (for up to TIMEOUT seconds)."""
+The popup stays open while the mouse is on any pill (bracket), inside the
+popup, or crossing the gap between the item and the popup (for up to
+GAP_TIMEOUT seconds)."""
 
 import json
 import subprocess
 import sys
 import time
 
-TIMEOUT = 2.0
+GAP_TIMEOUT = 2.0
 POLL = 0.15
 MARGIN = 6
 
@@ -55,15 +56,21 @@ def main():
     popup = (min(r[0] for r in rows), min(r[1] for r in rows),
              max(r[2] for r in rows), max(r[3] for r in rows))
     gap = (popup[0], parent[3], popup[2], popup[1])
+    pills = [r for r in (rect(query(name)) for name in query("bar").get("items", [])
+                         if query(name).get("type") == "bracket") if r]
 
-    deadline = time.time() + TIMEOUT
-    while time.time() < deadline:
-        if query(item).get("popup", {}).get("drawing") != "on":
-            return
+    gap_deadline = None
+    while query(item).get("popup", {}).get("drawing") == "on":
         p = mouse()
-        if inside(p, parent) or inside(p, popup, MARGIN):
+        if inside(p, popup, MARGIN):
             return
-        if not inside(p, gap, MARGIN):
+        if any(inside(p, pill) for pill in pills):
+            gap_deadline = None
+        elif inside(p, gap, MARGIN):
+            gap_deadline = gap_deadline or time.time() + GAP_TIMEOUT
+            if time.time() > gap_deadline:
+                break
+        else:
             break
         time.sleep(POLL)
     subprocess.run(["sketchybar", "--set", item, "popup.drawing=off"])
