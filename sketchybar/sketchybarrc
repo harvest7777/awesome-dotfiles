@@ -63,10 +63,17 @@ sketchybar --add item chevron left \
            --add item front_app left \
            --set front_app icon.drawing=on icon.background.drawing=on \
                  icon.background.image.scale=0.95 icon.width=31 icon.padding_right=6 \
+                 label.max_chars=16 \
                  script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched \
            --add item sparkles left \
-           --set sparkles icon.drawing=off label="⋆˙⟡ ⋆.˚ ⊹₊⟡ ⋆"
+           --set sparkles icon.drawing=off label="⋆˙⟡ ⋆.˚ ⊹₊⟡ ⋆" \
+           --add item wifi left \
+           --set wifi update_freq=10 script="$PLUGIN_DIR/wifi.sh" \
+           --subscribe wifi wifi_change system_woke \
+           --add item bluetooth left \
+           --set bluetooth update_freq=10 script="$PLUGIN_DIR/bluetooth.sh" \
+           --subscribe bluetooth system_woke
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
@@ -145,7 +152,7 @@ group=(
   background.corner_radius=10
   background.height=32
 )
-sketchybar --add bracket left_group workspace chevron front_app sparkles \
+sketchybar --add bracket left_group workspace chevron front_app sparkles wifi bluetooth \
            --set left_group "${group[@]}" \
            --add bracket right_group clock volume battery spotify \
            --set right_group "${group[@]}"
