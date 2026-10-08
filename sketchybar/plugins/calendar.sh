@@ -15,7 +15,6 @@ CAL_CHARS=20 # width of a cal row: 7 days * 3 chars - 1
 px() { printf '%.0f' "$(echo "$1 * $CHAR_W" | bc)"; }
 
 # Today's events from macOS Calendar (includes synced Google calendars)
-MAX_EVENTS=6
 events=()
 while IFS= read -r line; do
   [ -n "$line" ] && events+=("$line")
@@ -71,10 +70,5 @@ for i in 0 1 2 3 4 5 6; do
   fi
 done
 
-for ((i = 0; i < MAX_EVENTS; i++)); do
-  if [ -n "${events[$i]}" ]; then
-    sketchybar --set cal.event.$i drawing=on label="${events[$i]}"
-  else
-    sketchybar --set cal.event.$i drawing=off
-  fi
-done
+source "$CONFIG_DIR/plugins/popup_rows.sh"
+popup_rows clock cal.event cal.pad_bottom "${events[@]}"

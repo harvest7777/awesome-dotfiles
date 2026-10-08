@@ -4,7 +4,6 @@
 # opens a popup listing the connected devices.
 
 BLUEUTIL=/opt/homebrew/bin/blueutil
-MAX_DEVICES=8
 
 if [ "$SENDER" = "mouse.exited" ]; then
   "$CONFIG_DIR/plugins/popup_autoclose.py" "$NAME" >/dev/null 2>&1 &
@@ -34,13 +33,8 @@ case "$SENDER" in
       rows=("No devices connected")
     fi
 
-    for ((i = 0; i < MAX_DEVICES; i++)); do
-      if [ -n "${rows[$i]}" ]; then
-        sketchybar --set bt.device.$i drawing=on label="${rows[$i]}"
-      else
-        sketchybar --set bt.device.$i drawing=off
-      fi
-    done
+    source "$CONFIG_DIR/plugins/popup_rows.sh"
+    popup_rows "$NAME" bt.device bt.pad_bottom "${rows[@]}"
     sketchybar --set "$NAME" popup.drawing=on
     ;;
   mouse.exited.global)
