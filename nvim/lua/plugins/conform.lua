@@ -11,6 +11,7 @@ return {
       -- Perl modules the system perl doesn't have, and it's slow enough to
       -- blow the format-on-save budget on a long document.
       tex = { "tex-fmt" },
+      html = { "prettier" },
     },
   },
 }
