@@ -1,5 +1,5 @@
 theme = Catppuccin Latte
-background-opacity = 0.85
+background-opacity = 0.8
 background-blur = 20
 title = " "
 macos-titlebar-proxy-icon = hidden
