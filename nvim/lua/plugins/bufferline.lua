@@ -1,3 +1,14 @@
+-- Close a buffer only if it has no unsaved changes
+local function close_if_saved(bufnr)
+  if vim.bo[bufnr].modified then
+    local name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ':t')
+    vim.notify('Not closing ' .. (name ~= '' and name or '[No Name]') .. ': unsaved changes',
+      vim.log.levels.WARN)
+    return
+  end
+  vim.cmd('bdelete ' .. bufnr)
+end
+
 return {
   'akinsho/bufferline.nvim',
   version = '*',
@@ -19,9 +30,9 @@ return {
     options = {
       -- switch to 'tabs' to list tab pages instead of open buffers
       mode = 'buffers',
-      -- Default is bdelete!, which discards unsaved changes; confirm asks first
-      close_command = 'confirm bdelete %d',
-      right_mouse_command = 'confirm bdelete %d',
+      -- Default is bdelete!, which discards unsaved changes; skip those instead
+      close_command = close_if_saved,
+      right_mouse_command = close_if_saved,
       diagnostics = 'nvim_lsp',
       diagnostics_indicator = function(count, level)
         return (level:match('error') and ' ' or ' ') .. count
