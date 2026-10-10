@@ -22,7 +22,6 @@ vim.opt.swapfile = false
 vim.opt.undofile = true -- persistent undo across sessions
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.confirm = true -- ask to save instead of erroring on :q with changes
-vim.opt.smoothscroll = true -- scroll wrapped lines by screen line, not whole line
 vim.opt.iskeyword:append("-")
 
 vim.o.updatetime = 250 -- CursorHold fires this soon; drives reference highlighting
