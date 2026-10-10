@@ -12,6 +12,10 @@ return {
       -- blow the format-on-save budget on a long document.
       tex = { "tex-fmt" },
       html = { "prettier" },
+      javascript = { "prettier" },
+      javascriptreact = { "prettier" },
+      typescript = { "prettier" },
+      typescriptreact = { "prettier" },
     },
   },
 }
