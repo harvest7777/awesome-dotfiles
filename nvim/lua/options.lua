@@ -23,6 +23,7 @@ vim.opt.undofile = true -- persistent undo across sessions
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.iskeyword:append("-")
 
+vim.o.updatetime = 250 -- CursorHold fires this soon; drives reference highlighting
 vim.o.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
   callback = function()
