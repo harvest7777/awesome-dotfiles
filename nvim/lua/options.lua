@@ -21,7 +21,6 @@ vim.opt.splitbelow = true
 vim.opt.swapfile = false
 vim.opt.undofile = true -- persistent undo across sessions
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.confirm = true -- ask to save instead of erroring on :q with changes
 vim.opt.iskeyword:append("-")
 
 vim.o.updatetime = 250 -- CursorHold fires this soon; drives reference highlighting
