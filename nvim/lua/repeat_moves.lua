@@ -22,10 +22,54 @@ local function repeatable(move)
   end
 end
 
+-- Built-in ]s / [s get stuck in some Markdown files (e.g. [s can't go back
+-- past certain lines, ]s doesn't wrap), so find misspellings directly:
+-- check each line with vim.spell.check, skip words treesitter marks @nospell
+-- (code), and wrap around the buffer like 'wrapscan'.
+local function spell_targets()
+  local targets = {}
+  for row, line in ipairs(vim.api.nvim_buf_get_lines(0, 0, -1, false)) do
+    for _, hit in ipairs(vim.spell.check(line)) do
+      local col = hit[3] - 1
+      local nospell = false
+      for _, cap in ipairs(vim.treesitter.get_captures_at_pos(0, row - 1, col)) do
+        if cap.capture == 'nospell' then nospell = true end
+      end
+      if not nospell then table.insert(targets, { row, col }) end
+    end
+  end
+  return targets
+end
+
+local function spell_jump(forward, count)
+  if not vim.wo.spell then return end
+  local targets = spell_targets()
+  if #targets == 0 then return end
+  local cur = vim.api.nvim_win_get_cursor(0)
+  local function after(t) return t[1] > cur[1] or (t[1] == cur[1] and t[2] > cur[2]) end
+  local function before(t) return t[1] < cur[1] or (t[1] == cur[1] and t[2] < cur[2]) end
+
+  -- index of the first target past the cursor in the jump direction
+  local idx
+  if forward then
+    idx = #targets + 1
+    for i, t in ipairs(targets) do
+      if after(t) then idx = i break end
+    end
+    idx = idx + count - 1
+  else
+    idx = 0
+    for i = #targets, 1, -1 do
+      if before(targets[i]) then idx = i break end
+    end
+    idx = idx - count + 1
+  end
+  idx = (idx - 1) % #targets + 1 -- wrap around
+  vim.api.nvim_win_set_cursor(0, targets[idx])
+end
+
 local moves = {
-  s = { desc = 'misspelled word', move = function(forward, count)
-    vim.cmd('normal! ' .. count .. (forward and ']s' or '[s'))
-  end },
+  s = { desc = 'misspelled word', move = spell_jump },
   d = { desc = 'diagnostic', move = function(forward, count)
     vim.diagnostic.jump({ count = forward and count or -count, float = { border = 'rounded' } })
   end },
