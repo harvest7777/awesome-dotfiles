@@ -2,5 +2,8 @@
 return {
   'folke/which-key.nvim',
   event = 'VeryLazy',
-  opts = {},
+  opts = {
+    -- Compact box in the bottom-right corner with a rounded border
+    preset = 'helix',
+  },
 }
