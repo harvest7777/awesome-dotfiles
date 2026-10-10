@@ -46,6 +46,15 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Underline typos in prose; ]s / [s jump between them, z= suggests fixes
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'text', 'gitcommit' },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = 'en_us'
+  end,
+})
+
 local cursor_positions = {}
 
 vim.api.nvim_create_autocmd('BufLeave', {
