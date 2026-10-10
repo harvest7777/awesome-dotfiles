@@ -1,15 +1,16 @@
 #!/bin/bash
 
-# Toggles a floating Ghostty window editing the todo list. The pop-up is its
-# own Ghostty instance, found by its pid. Hiding parks it on an unbound
-# "scratch" workspace; showing pulls it onto the current one.
+# Toggles a floating Ghostty window editing ~/Documents/scratch/$1.md, e.g.
+# `note-popup.sh todo`. Each pop-up is its own Ghostty instance, found by its
+# pid. Hiding parks it on an unbound "hidden" workspace; showing pulls it onto
+# the current one.
 
 export PATH="/opt/homebrew/bin:$PATH"
 
-TODO=/Users/ryantran/Documents/scratch/todo.md
+NOTE="/Users/ryantran/Documents/scratch/$1.md"
 # The pop-up's Ghostty is the only one launched with this, so it doubles as
 # the marker for finding its process
-MARK="--initial-command=/opt/homebrew/bin/nvim $TODO"
+MARK="--initial-command=/opt/homebrew/bin/nvim $NOTE"
 
 window_id() {
   local pid
@@ -36,7 +37,7 @@ id=$(window_id)
 [ -z "$id" ] && exit
 
 if [ "$id" = "$(aerospace list-windows --focused --format '%{window-id}')" ]; then
-  aerospace move-node-to-workspace --window-id "$id" scratch
+  aerospace move-node-to-workspace --window-id "$id" hidden
 else
   aerospace move-node-to-workspace --window-id "$id" "$(aerospace list-workspaces --focused)"
   aerospace focus --window-id "$id"
