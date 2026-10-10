@@ -6,6 +6,15 @@ return {
       popup = {
         size = { width = "80%", height = "70%" },
       },
+      -- Nvim 0.12 sends the question and the [Y]es/(N)o buttons as one line;
+      -- noice's confirm formatter expects them on separate lines and drops
+      -- the question, so show the raw text instead
+      confirm = {
+        format = { "{message}" },
+        -- Wrap long file paths instead of cutting off the buttons
+        size = { width = 80, height = "auto" },
+        win_options = { wrap = true },
+      },
     },
     messages = {
       enabled = true,
