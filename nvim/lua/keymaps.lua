@@ -86,7 +86,8 @@ vim.keymap.set('n', '<leader>qq', function()
   if package.loaded['grug-far'] then
     pcall(require('grug-far').kill_instance, 'main')
   end
-  vim.cmd('qa!')
+  -- confirm: prompts to save unsaved buffers instead of discarding them
+  pcall(vim.cmd, 'confirm qa')
 end, { desc = 'Quit all' })
 vim.keymap.set('n', '<leader>cc', function()
   vim.cmd('write')
