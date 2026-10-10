@@ -19,6 +19,9 @@ return {
     options = {
       -- switch to 'tabs' to list tab pages instead of open buffers
       mode = 'buffers',
+      -- Default is bdelete!, which discards unsaved changes; confirm asks first
+      close_command = 'confirm bdelete %d',
+      right_mouse_command = 'confirm bdelete %d',
       diagnostics = 'nvim_lsp',
       diagnostics_indicator = function(count, level)
         return (level:match('error') and ' ' or ' ') .. count
