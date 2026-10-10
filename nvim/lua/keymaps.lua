@@ -83,11 +83,23 @@ end, { desc = "Delete current buffer safely" })
 vim.keymap.set('n', '<leader>ww', '<cmd>w<cr>', { desc = 'Write file' })
 vim.keymap.set('n', '<leader>wa', '<cmd>wa<cr>', { desc = 'Write all' })
 vim.keymap.set('n', '<leader>qq', function()
+  -- Refuse to quit while any file has unsaved changes. grug-far's buffer
+  -- always counts as modified, so it's ignored and killed separately.
+  local unsaved = {}
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.bo[buf].buflisted and vim.bo[buf].modified and vim.bo[buf].filetype ~= 'grug-far' then
+      table.insert(unsaved, vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ':t'))
+    end
+  end
+  if #unsaved > 0 then
+    vim.notify('Unsaved changes: ' .. table.concat(unsaved, ', '), vim.log.levels.WARN)
+    return
+  end
+
   if package.loaded['grug-far'] then
     pcall(require('grug-far').kill_instance, 'main')
   end
-  -- confirm: prompts to save unsaved buffers instead of discarding them
-  pcall(vim.cmd, 'confirm qa')
+  vim.cmd('qa!')
 end, { desc = 'Quit all' })
 vim.keymap.set('n', '<leader>cc', function()
   vim.cmd('write')
