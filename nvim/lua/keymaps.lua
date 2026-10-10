@@ -195,8 +195,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('K', function() vim.lsp.buf.hover({ border = 'rounded', max_width = 80 }) end, 'Hover docs')
     map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
     map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-    map('[d', function() vim.diagnostic.jump({ count = -1, float = { border = 'rounded' } }) end, 'Prev diagnostic')
-    map(']d', function() vim.diagnostic.jump({ count = 1, float = { border = 'rounded' } }) end, 'Next diagnostic')
   end,
 })
 

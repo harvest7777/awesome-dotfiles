@@ -15,8 +15,6 @@ return {
   dependencies = 'nvim-tree/nvim-web-devicons',
   event = 'VeryLazy',
   keys = {
-    { ']b',         '<cmd>BufferLineCycleNext<cr>',   desc = 'Next buffer' },
-    { '[b',         '<cmd>BufferLineCyclePrev<cr>',   desc = 'Prev buffer' },
     { '<leader>bm', '<cmd>BufferLineMoveNext<cr>',    desc = 'Move buffer right' },
     { '<leader>bM', '<cmd>BufferLineMovePrev<cr>',    desc = 'Move buffer left' },
     { '<leader>bp', '<cmd>BufferLineTogglePin<cr>',   desc = 'Pin buffer' },

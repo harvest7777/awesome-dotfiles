@@ -2,6 +2,11 @@ return {
   'folke/flash.nvim',
   event = 'VeryLazy',
   opts = {},
+  config = function(_, opts)
+    require('flash').setup(opts)
+    -- ]s ]d ]c ]b, plus ; and , repeating them as well as f/t
+    require('repeat_moves').setup()
+  end,
   keys = {
     { 's',     mode = { 'n', 'x', 'o' }, function() require('flash').jump() end,              desc = 'Flash' },
     { 'S',     mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end,        desc = 'Flash Treesitter' },
