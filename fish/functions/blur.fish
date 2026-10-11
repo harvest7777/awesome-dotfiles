@@ -6,5 +6,5 @@ function blur
     set -l frames 4
     set -q argv[2]; and set frames $argv[2]
     set -l out (path dirname $in)/blurred_(path basename $in)
-    ffmpeg -i $in -vf "tmix=frames=$frames,fps=60" -c:v h264_videotoolbox -b:v 40M -c:a copy $out
+    ffmpeg -i $in -vf "tmix=frames=$frames,fps=60" -c:v libx264 -crf 18 -preset medium -c:a copy $out
 end
