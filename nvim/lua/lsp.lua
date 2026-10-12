@@ -41,10 +41,35 @@ vim.lsp.config('pyright', {
   }
 })
 
+-- TypeScript 7 (native) ships no tsserver, so typescript-language-server can't
+-- start there; it has its own LSP via `tsc --lsp`. Pick per project.
+local function uses_ts7(root)
+  local ok, lines = pcall(vim.fn.readfile, root .. '/node_modules/typescript/package.json')
+  return ok and table.concat(lines):match('"version":%s*"7') ~= nil
+end
+
+local ts_filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' }
+local ts_root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' }
+
 vim.lsp.config('ts_ls', {
   cmd = { 'typescript-language-server', '--stdio' },
-  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+  filetypes = ts_filetypes,
+  root_dir = function(bufnr, on_dir)
+    local root = vim.fs.root(bufnr, ts_root_markers)
+    if root and not uses_ts7(root) then on_dir(root) end
+  end,
+})
+
+vim.lsp.config('tsgo', {
+  cmd = function(dispatchers, config)
+    local tsc = config.root_dir .. '/node_modules/.bin/tsc'
+    return vim.lsp.rpc.start({ tsc, '--lsp', '--stdio' }, dispatchers, { cwd = config.root_dir })
+  end,
+  filetypes = ts_filetypes,
+  root_dir = function(bufnr, on_dir)
+    local root = vim.fs.root(bufnr, ts_root_markers)
+    if root and uses_ts7(root) then on_dir(root) end
+  end,
 })
 
 vim.lsp.config('yamlls', {
