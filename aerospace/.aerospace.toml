@@ -1,7 +1,7 @@
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 
-after-startup-command = []
+after-startup-command = ['exec-and-forget sketchybar']
 
 # Tell sketchybar which workspace is focused
 exec-on-workspace-change = ['/bin/bash', '-c',
