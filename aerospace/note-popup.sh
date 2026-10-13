@@ -11,6 +11,10 @@ NOTE="/Users/ryantran/Documents/scratch/$1.md"
 # The pop-up's Ghostty is the only one launched with this, so it doubles as
 # the marker for finding its process
 MARK="--initial-command=/opt/homebrew/bin/nvim $NOTE"
+# Window that had focus before the pop-up showed, refocused when it hides.
+# Otherwise macOS hands focus to whatever it likes, e.g. a floating window
+# that was behind the terminal.
+PREV="${TMPDIR:-/tmp}/note-popup-$1.prev"
 
 window_id() {
   local pid
@@ -20,6 +24,7 @@ window_id() {
 }
 
 if ! pgrep -qf -- "$MARK"; then
+  aerospace list-windows --focused --format '%{window-id}' >"$PREV"
   # Not -e: launched through `open`, Ghostty treats a trailing path as a
   # document to run in a shell instead of an argument to nvim
   open -na Ghostty --args --window-save-state=never \
@@ -38,7 +43,12 @@ id=$(window_id)
 
 if [ "$id" = "$(aerospace list-windows --focused --format '%{window-id}')" ]; then
   aerospace move-node-to-workspace --window-id "$id" hidden
+  prev=$(cat "$PREV" 2>/dev/null)
+  # Only if it's still on this workspace, so hiding never switches workspaces
+  aerospace list-windows --workspace focused --format '%{window-id}' | grep -qx "$prev" &&
+    aerospace focus --window-id "$prev"
 else
+  aerospace list-windows --focused --format '%{window-id}' >"$PREV"
   aerospace move-node-to-workspace --window-id "$id" "$(aerospace list-workspaces --focused)"
   aerospace focus --window-id "$id"
 fi
