@@ -42,11 +42,13 @@ id=$(window_id)
 [ -z "$id" ] && exit
 
 if [ "$id" = "$(aerospace list-windows --focused --format '%{window-id}')" ]; then
-  aerospace move-node-to-workspace --window-id "$id" hidden
   prev=$(cat "$PREV" 2>/dev/null)
-  # Only if it's still on this workspace, so hiding never switches workspaces
+  # Focus it before hiding, not after, so macOS never gets a gap to raise
+  # something else. Only if it's still on this workspace, so hiding never
+  # switches workspaces.
   aerospace list-windows --workspace focused --format '%{window-id}' | grep -qx "$prev" &&
     aerospace focus --window-id "$prev"
+  aerospace move-node-to-workspace --window-id "$id" hidden
 else
   aerospace list-windows --focused --format '%{window-id}' >"$PREV"
   aerospace move-node-to-workspace --window-id "$id" "$(aerospace list-workspaces --focused)"
