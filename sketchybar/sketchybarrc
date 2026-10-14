@@ -69,7 +69,7 @@ sketchybar --add item chevron left \
            --add item sparkles left \
            --set sparkles icon.drawing=off label="⋆˙⟡ ⋆.˚ ⊹₊⟡ ⋆" \
            --add item wifi left \
-           --set wifi update_freq=10 label.max_chars=16 script="$PLUGIN_DIR/wifi.sh" \
+           --set wifi update_freq=10 script="$PLUGIN_DIR/wifi.sh" \
            --subscribe wifi wifi_change system_woke \
            --add item bluetooth left \
            --set bluetooth update_freq=10 script="$PLUGIN_DIR/bluetooth.sh" \
