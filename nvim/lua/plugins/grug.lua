@@ -34,6 +34,6 @@ return
       else
         grug_far.open({ instanceName = 'main' })
       end
-    end, { desc = 'Open Grug' })
+    end, { desc = 'Search and replace in project' })
   end
 }

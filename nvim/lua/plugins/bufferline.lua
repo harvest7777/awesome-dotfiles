@@ -17,9 +17,9 @@ return {
   keys = {
     { '<leader>bm', '<cmd>BufferLineMoveNext<cr>',    desc = 'Move buffer right' },
     { '<leader>bM', '<cmd>BufferLineMovePrev<cr>',    desc = 'Move buffer left' },
-    { '<leader>bp', '<cmd>BufferLineTogglePin<cr>',   desc = 'Pin buffer' },
-    { '<leader>bl', '<cmd>BufferLineCloseLeft<cr>',   desc = 'Close left' },
-    { '<leader>br', '<cmd>BufferLineCloseRight<cr>',  desc = 'Close right' },
+    { '<leader>bp', '<cmd>BufferLineTogglePin<cr>',   desc = 'Toggle pin' },
+    { '<leader>bl', '<cmd>BufferLineCloseLeft<cr>',   desc = 'Close buffers to the left' },
+    { '<leader>br', '<cmd>BufferLineCloseRight<cr>',  desc = 'Close buffers to the right' },
     { '<leader>bb', '<cmd>BufferLinePick<cr>',        desc = 'Pick buffer' },
     { '<leader>bd', '<cmd>BufferLinePickClose<cr>',   desc = 'Pick buffer to close' },
     { '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', desc = 'Close other buffers' },
