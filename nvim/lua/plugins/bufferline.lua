@@ -23,6 +23,8 @@ return {
     { '<leader>bb', '<cmd>BufferLinePick<cr>',        desc = 'Pick buffer' },
     { '<leader>bd', '<cmd>BufferLinePickClose<cr>',   desc = 'Pick buffer to close' },
     { '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', desc = 'Close other buffers' },
+    { '<M-{>',      '<cmd>BufferLineCyclePrev<cr>',   desc = 'Previous buffer' },
+    { '<M-}>',      '<cmd>BufferLineCycleNext<cr>',   desc = 'Next buffer' },
   },
   opts = {
     options = {
