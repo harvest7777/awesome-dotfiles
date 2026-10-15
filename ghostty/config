@@ -3,3 +3,4 @@ background-opacity = 1
 background-blur = 20
 title = " "
 macos-titlebar-proxy-icon = hidden
+keybind = super+k=text:\x02K
