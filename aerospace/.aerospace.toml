@@ -56,10 +56,6 @@ if.app-name-regex-substring = 'Preview'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'Activity Monitor2026/05/23'
-run = 'layout floating'
-
-[[on-window-detected]]
 if.app-name-regex-substring = 'OpenWhispr'
 run = 'layout floating'
 
