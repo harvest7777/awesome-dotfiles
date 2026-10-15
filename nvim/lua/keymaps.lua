@@ -196,8 +196,6 @@ vim.keymap.set("x", "<leader>p", [["_dP]], { desc = 'Paste without overwriting c
 -------------------------------------------------------------------------------
 -- Scrolling and tabs
 -------------------------------------------------------------------------------
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down and center' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up and center' })
 vim.keymap.set('n', 'n', 'nzz', { desc = 'Next match and center' })
 vim.keymap.set('n', 'N', 'Nzz', { desc = 'Prev match and center' })
 
