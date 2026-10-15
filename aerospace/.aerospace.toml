@@ -163,6 +163,7 @@ run = 'layout floating'
     # alt-w = 'close'
 
     alt-a = 'workspace A'
+    alt-c = 'workspace C'
     alt-d = 'workspace D'
     alt-e = 'workspace E'
     alt-s = 'workspace S'
