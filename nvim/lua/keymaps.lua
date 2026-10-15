@@ -260,7 +260,9 @@ vim.keymap.set('n', '<leader>no', function()
 end, { desc = 'Yazi at current file' })
 
 vim.keymap.set('n', '<leader>oo', function()
-  vim.fn.jobstart({ 'open', vim.fn.expand('%:p:h') }, { detach = true })
+  -- not `open`, which jumps to whichever workspace already has a Finder window
+  vim.fn.jobstart({ vim.fn.expand('~/Developer/dotfiles/aerospace/finder-here.sh'), vim.fn.expand('%:p:h') },
+    { detach = true })
 end, { desc = "Open file's folder in Finder" })
 
 local function explorer_root()
