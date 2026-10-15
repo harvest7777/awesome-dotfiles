@@ -134,11 +134,6 @@ local function real_path_for_current_buffer()
   return root .. "/" .. rel
 end
 
--- backslash-escape so the copied path pastes straight into a shell
-local function shell_escape_path(path)
-  return (path:gsub("([%s'\"()&;$`\\!*?<>|])", "\\%1"))
-end
-
 vim.keymap.set('n', '<leader>p', function()
   vim.fn.setreg("+", real_path_for_current_buffer() or vim.fn.expand("%:p"))
 end, { desc = 'Copy absolute path' })
@@ -148,11 +143,6 @@ vim.keymap.set('n', '<leader>P', function()
   local rel = abs and vim.fn.fnamemodify(abs, ":~:.") or vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
   vim.fn.setreg("+", rel)
 end, { desc = 'Copy relative path' })
-
-vim.keymap.set('n', '<leader>d', function()
-  local abs = real_path_for_current_buffer() or vim.fn.expand("%:p")
-  vim.fn.setreg("+", shell_escape_path(vim.fn.fnamemodify(abs, ":h")))
-end, { desc = 'Copy directory path' })
 
 vim.keymap.set('n', '<leader>nf', function()
   local real = real_path_for_current_buffer()
